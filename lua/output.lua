@@ -51,7 +51,7 @@ local function create_entity(entities, center, damage, items, fluids, out)
       end
     end
     if damage and entity.is_entity_with_health and (entity.get_health_ratio() ~= 1) then
-      local dmg = math.floor(entity.prototype.max_health - entity.health)
+      local dmg = math.floor(entity.max_health - entity.health)
       out[#out+1] = "dmg = {dmg = " .. dmg .. "}, "
     end
     if items and entity.has_items_inside() then
@@ -93,7 +93,7 @@ output = function(entities, tiles, tile_filter, center, name, damage, items, flu
   end
 
   out[#out+1] = "}\n"
-  game.write_file("ruins/" .. name .. ".lua", table.concat(out))
+  helpers.write_file("ruins/" .. name .. ".lua", table.concat(out))
 end
 
 return output

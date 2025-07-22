@@ -1,7 +1,28 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2025-07-22
+  Features:
+    - moved `utilities.lua` and `output.lua` to folder `lua` to have the root directory
+      tidied up a bit
+    - added `scripts/build_package.py` for easy compiling ZIP files releasable on mod portal
+    - added Russian locale (thanks to @Keysivi for the translation)
+    - added .gitignore/.gitattributes
+  Bugfixes:
+    - fixed this file for being parsed by mod portal
+---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 2024-12-20
+  Bugfixes:
+    - Fixed a bug with saving corrupted entities
+      A huge thanks to IsaacOscar and boskid for their invaluable help in solving this problem.
+  Minor Features:
+    - Added support for fluid spawning.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.4
-Date: ????
-  Changes:
+Date: 2024-12-20
+  Bugfixes:
+    - Updated to Factoro 2.0
+      A huge thanks to IsaacOscar for his invaluable help in updating this mod.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.3
 Date: 2021-02-25
@@ -22,3 +43,4 @@ Version: 0.1.0
 Date: 2020-09-23
   Major Features:
     - Initial release.
+---------------------------------------------------------------------------------------------------

@@ -1,22 +1,22 @@
-local util = require("utilities")
-local output_selection = require("output")
+local utils = require("lua/utilities")
+local output_selection = require("lua/output")
 
 local function discard_selection(player_index)
-  for _, render in pairs(global.selection[player_index].renders) do
-    rendering.destroy(render)
+  for _, render in pairs(storage.selection[player_index].renders) do
+    render.destroy()
   end
-  global.selection[player_index] = nil
+  storage.selection[player_index] = nil
 end
 
 local function confirm_selection(player_index, name)
-  local data = global.selection[player_index]
+  local data = storage.selection[player_index]
   output_selection(data.entities, data.tiles, data.tile_filter, data.center, name ~= "" and name or "unknown", data["ruin-maker-damage"], data["ruin-maker-items"], data["ruin-maker-fluids"], player_index)
   discard_selection(player_index)
 end
 
 script.on_event(defines.events.on_gui_click, function(event)
   if event.element.name == "ruin-maker-confirm" then
-    confirm_selection(event.player_index, global.selection[event.player_index].name.text)
+    confirm_selection(event.player_index, storage.selection[event.player_index].name.text)
     game.get_player(event.player_index).gui.screen["ruin-maker-main"].destroy()
   elseif event.element.name == "ruin-maker-cancel" then
     discard_selection(event.player_index)
@@ -26,15 +26,15 @@ end)
 
 script.on_event(defines.events.on_gui_checked_state_changed, function(event)
   if event.element.parent and event.element.parent.name == "ruin-maker-tile-filter" then
-    global.selection[event.player_index].tile_filter[event.element.name] = event.element.state
+    storage.selection[event.player_index].tile_filter[event.element.name] = event.element.state
   elseif event.element.parent and event.element.parent.name == "ruin-maker-config" then
-    global.selection[event.player_index][event.element.name] = event.element.state
+    storage.selection[event.player_index][event.element.name] = event.element.state
   end
 end)
 
 script.on_event(defines.events.on_gui_confirmed, function(event)
-  if not global.selection[event.player_index] then return end
-  if event.element == global.selection[event.player_index].name then
+  if not storage.selection[event.player_index] then return end
+  if event.element == storage.selection[event.player_index].name then
     confirm_selection(event.player_index, event.element.text)
     game.get_player(event.player_index).gui.screen["ruin-maker-main"].destroy()
   end
@@ -65,8 +65,8 @@ local function config_gui(player, tile_names, area)
   do
     local flow = gui.add{type="flow", direction = "vertical"}
     flow.add{type = "label", caption = {"gui.ruin-maker-name"}}
-    global.selection[player.index].name = flow.add{type = "textfield"}
-    global.selection[player.index].name.focus()
+    storage.selection[player.index].name = flow.add{type = "textfield"}
+    storage.selection[player.index].name.focus()
   end
 
   if next(tile_names) ~= nil then
@@ -91,7 +91,7 @@ local function configure_selection(entities, tiles, area, center, player_index, 
     tile_names[tile.name] = true
   end
 
-  global.selection[player_index] = {
+  storage.selection[player_index] = {
     entities = entities,
     tiles = tiles,
     tile_filter = tile_names,
@@ -137,7 +137,7 @@ end
 
 script.on_event({defines.events.on_player_selected_area, defines.events.on_player_alt_selected_area}, function(event)
   if event.item ~= "ruin-maker" then return end
-  if global.selection[event.player_index] ~= nil then
+  if storage.selection[event.player_index] ~= nil then
     game.get_player(event.player_index).print({"error.ruin-maker-already-in-progress"})
     return
   end
@@ -151,5 +151,5 @@ script.on_event({defines.events.on_player_selected_area, defines.events.on_playe
 end)
 
 script.on_init(function()
-  global.selection = {}
+  storage.selection = {}
 end)
