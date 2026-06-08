@@ -47,30 +47,30 @@ local function config_gui(player, tile_names, area)
   gui = gui.add{type = "table", name = "ruin-maker-config", style = "bordered_table", column_count = 1}
 
   do
-    local w = area.right_bottom.x - area.left_top.x
-    local h = area.right_bottom.y - area.left_top.y
+    local width = area.right_bottom.x - area.left_top.x
+    local height = area.right_bottom.y - area.left_top.y
     local name = "too big"
-    if w <= 8 and h <= 8 then
+    if width <= 8 and height <= 8 then
       name = "small"
-    elseif w <= 16 and h <= 16 then
+    elseif width <= 16 and height <= 16 then
       name = "medium"
-    elseif w <= 32 and h <= 32 then
+    elseif width <= 32 and height <= 32 then
       name = "large"
     end
 
-    local flow = gui.add{type="flow", direction = "vertical"}
-    flow.add{type = "label", caption = {"gui.ruin-maker-size", name, w, h}}
+    local flow = gui.add{type = "flow", direction = "vertical"}
+    flow.add{type = "label", caption = {"gui.ruin-maker-size", name, width, height}}
   end
 
   do
-    local flow = gui.add{type="flow", direction = "vertical"}
+    local flow = gui.add{type = "flow", direction = "vertical"}
     flow.add{type = "label", caption = {"gui.ruin-maker-name"}}
     storage.selection[player.index].name = flow.add{type = "textfield"}
     storage.selection[player.index].name.focus()
   end
 
   if next(tile_names) ~= nil then
-    local frame = gui.add{type="flow", name = "ruin-maker-tile-filter", direction = "vertical"}
+    local frame = gui.add{type = "flow", name = "ruin-maker-tile-filter", direction = "vertical"}
     frame.add{type = "label", caption = {"gui.ruin-maker-tile-filter"}}
     for tile_name in pairs(tile_names) do
       frame.add{type = "checkbox", name = tile_name, caption = tile_name, state = true}
@@ -78,10 +78,10 @@ local function config_gui(player, tile_names, area)
   end
 
   gui.add{type = "checkbox", name = "ruin-maker-damage", caption = {"gui.ruin-maker-damage"}, state = true}
-  gui.add{type = "checkbox", name = "ruin-maker-items", caption = {"gui.ruin-maker-items"}, state = true}
+  gui.add{type = "checkbox", name = "ruin-maker-items" , caption = {"gui.ruin-maker-items" }, state = true}
   gui.add{type = "checkbox", name = "ruin-maker-fluids", caption = {"gui.ruin-maker-fluids"}, state = true}
 
-  gui.add{type = "button", name = "ruin-maker-cancel", caption = {"gui.ruin-maker-cancel"}}
+  gui.add{type = "button", name = "ruin-maker-cancel" , caption = {"gui.ruin-maker-cancel" }}
   gui.add{type = "button", name = "ruin-maker-confirm", caption = {"gui.ruin-maker-confirm"}}
 end
 

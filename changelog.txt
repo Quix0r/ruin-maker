@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.7
+Date: 2026-06-08
+  Changes:
+    - renamed shortened variables to longer names
+    - AbandonedRuins_updated_fork must be at least 1.4.1 to make this mod work
+  Minor:
+    - updated .gitignore file
+    - updated documentation, remote-call function 'register_ruin_set' is not possible
+---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 2025-07-22
   Features:

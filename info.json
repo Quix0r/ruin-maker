@@ -1,6 +1,6 @@
 {
   "name": "ruin-maker_updated_fork",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "title": "Ruin Maker - Updated",
   "author": "roland77, Keysivi, Bilka",
   "description": "Generates ruin files for 'Abandoned Ruins - Updated' from setups selected in-game.",
@@ -8,7 +8,7 @@
   "dependencies":
   [
     "base >= 2.0.60",
-    "?AbandonedRuins_updated_fork"
+    "?AbandonedRuins_updated_fork >= 1.4.1"
   ],
   "package":
   {
