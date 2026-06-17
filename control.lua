@@ -1,4 +1,4 @@
-local utils = require("lua/utilities")
+local util = require("lua/utilities")
 local output_selection = require("lua/output")
 
 local function discard_selection(player_index)
